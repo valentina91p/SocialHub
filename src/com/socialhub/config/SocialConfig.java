@@ -24,10 +24,11 @@ import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
 import org.springframework.social.connect.web.ConnectController;
-import org.springframework.social.connect.web.ProviderSignInController;
 import org.springframework.social.connect.web.ReconnectFilter;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.connect.FacebookConnectionFactory;
+import org.springframework.social.twitter.api.Twitter;
+import org.springframework.social.twitter.connect.TwitterConnectionFactory;
 
 import com.socialhub.controladores.SimpleConnectionSignUp;
 
@@ -44,7 +45,9 @@ public class SocialConfig implements SocialConfigurer {
 		connectionFactoryConfigurer.addConnectionFactory(new FacebookConnectionFactory(
 	            environment.getProperty("spring.social.facebook.appId"),
 	            environment.getProperty("spring.social.facebook.appSecret")));
-		
+		connectionFactoryConfigurer.addConnectionFactory(new TwitterConnectionFactory(
+	            environment.getProperty("spring.social.twitter.appId"),
+	            environment.getProperty("spring.social.twitter.appSecret")));
 	}
 
 	@Override
@@ -76,6 +79,13 @@ public class SocialConfig implements SocialConfigurer {
 		return connection != null ? connection.getApi() : null;
 	}
 	
+	@Bean
+	@Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
+	public Twitter twitter(ConnectionRepository repository) {
+		Connection<Twitter> connection = repository.findPrimaryConnection(Twitter.class);
+		return connection != null ? connection.getApi() : null;
+	}
+	
 	/*
 	@Bean
 	public ProviderSignInController providerSignInController(ConnectionFactoryLocator connectionFactoryLocator, UsersConnectionRepository usersConnectionRepository) {
@@ -85,8 +95,7 @@ public class SocialConfig implements SocialConfigurer {
 	@Bean
 	public ConnectController connectController(ConnectionFactoryLocator connectionFactoryLocator, ConnectionRepository connectionRepository) {
 		ConnectController connectController = new ConnectController(connectionFactoryLocator, connectionRepository);
-		//connectController.addInterceptor(new PostToWallAfterConnectInterceptor());
-		//connectController.addInterceptor(new TweetAfterConnectInterceptor());
+		//connectController.setApplicationUrl("localhost:8080/SocialHub/config");
 		return connectController;
 	}
 	

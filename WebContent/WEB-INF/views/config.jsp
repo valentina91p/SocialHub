@@ -9,11 +9,23 @@
 </head>
 <body>
 	<form id="signin" action="<c:url value='connect/facebook' />" method="post">
-				<input type="hidden" name="scope" value="read_stream" />
-				<button type="submit">Facebook</button>
-			</form>
-			<form action="<c:url value='connect/facebook' />" method="delete">
-				<button type="submit">Quitar facebook</button>
-			</form>
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+		<input type="hidden" name="scope" value="read_stream" />
+		<button type="submit">Facebook</button>
+	</form>
+	<form action="<c:url value='connect/facebook' />" method="post">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+		<input type="hidden" name="_method" value="delete" />
+		<button type="submit">Quitar facebook</button>
+	</form>
+	<form action="<c:url value='connect/twitter' />" method="post">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+		<button type="submit">Twitter</button>
+	</form>
+	<form action="<c:url value='connect/twitter' />" method="post">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+		<input type="hidden" name="_method" value="delete" />
+		<button type="submit">Quitar twitter</button>
+	</form>
 </body>
 </html>

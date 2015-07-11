@@ -20,6 +20,7 @@
 	<h6><a href="${ perfil.link }">Ir a mi perfil</a></h6>
 	
 </c:if> 
+
 <c:if test="${!empty fbFeed}">
     
     <c:forEach items="${fbFeed}" var="post">
@@ -27,6 +28,16 @@
             <h6>${post.from.name}</h6> wrote:
 			<p>${post.message}</p>
 			<img src="${post.picture}"/>
+			<hr/>
+        </div>
+    </c:forEach>
+</c:if>
+<c:if test="${!empty timeline}">
+    <h3>Timeline</h3>
+    <c:forEach items="${timeline}" var="tweet">
+        <div>
+            <h6>${tweet.fromUser}</h6> wrote:
+			<p>${tweet.text}</p>
 			<hr/>
         </div>
     </c:forEach>
