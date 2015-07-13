@@ -10,10 +10,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.core.env.Environment;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.encrypt.Encryptors;
-import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.social.UserIdSource;
 import org.springframework.social.config.annotation.ConnectionFactoryConfigurer;
 import org.springframework.social.config.annotation.EnableSocial;
@@ -29,8 +27,6 @@ import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.connect.FacebookConnectionFactory;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.social.twitter.connect.TwitterConnectionFactory;
-
-import com.socialhub.controladores.SimpleConnectionSignUp;
 
 @Configuration
 @EnableSocial
@@ -68,7 +64,7 @@ public class SocialConfig implements SocialConfigurer {
 	public UsersConnectionRepository getUsersConnectionRepository(
 			ConnectionFactoryLocator connectionFactoryLocator) {
 		JdbcUsersConnectionRepository repository = new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator, Encryptors.noOpText());
-		repository.setConnectionSignUp(new SimpleConnectionSignUp());
+		//repository.setConnectionSignUp(new SimpleConnectionSignUp());
 		return repository;
 	}
 	

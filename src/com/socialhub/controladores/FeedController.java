@@ -6,17 +6,15 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.facebook.api.Facebook;
+import org.springframework.social.facebook.api.impl.FacebookTemplate;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 
-import com.socialhub.modelos.Usuario;
 import com.socialhub.servicios.UsuarioService;
 
 @Controller
@@ -32,13 +30,18 @@ public class FeedController {
 	private UsuarioService usuarioService;
 	
 	@RequestMapping(value={"/", "feed"}, method = RequestMethod.GET)
-	public String consultarUsuarios(Principal principal, Model model){
-		if(facebook != null && facebook.isAuthorized()){
-			model.addAttribute("fbFeed", facebook.feedOperations().getHomeFeed());
-			model.addAttribute("perfil", facebook.userOperations().getUserProfile());
+	public String llenarFeed(Principal principal, Model model){
+		boolean emptyFeed = true;
+		if(facebook != null){
+				if( facebook.isAuthorized()){
+					model.addAttribute("fbFeed", facebook.feedOperations().getHomeFeed());
+					model.addAttribute("perfil", facebook.userOperations().getUserProfile());
+					emptyFeed = false;
+				}
 		}
-		if (connectionRepository.findPrimaryConnection(Twitter.class) != null) {
+		if (twitter != null && twitter.isAuthorized()) {
 			model.addAttribute("timeline", twitter.timelineOperations().getHomeTimeline());
+			emptyFeed = false;
         }
 		model.addAttribute("usuario", usuarioService.loadUsuarioByUsername(principal.getName()));
 		return "feed";

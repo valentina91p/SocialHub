@@ -34,7 +34,7 @@
 					<li>rclarkson/atlanta</li>
 				</ul>
 				
-				<p>Or you can <a href="<c:url value='/signup' />">signup</a> with a new account.</p>
+				<p>Or you can <a href="<c:url value='signup'/>">signup</a> with a new account.</p>
 			</form>
 		</div>
 </body>
