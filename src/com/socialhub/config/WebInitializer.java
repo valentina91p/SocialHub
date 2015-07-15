@@ -23,8 +23,11 @@ public class WebInitializer implements WebApplicationInitializer {
 		servletContext.addListener(new ContextLoaderListener(ctx));
 		registerHiddenFieldFilter(servletContext);
 		Dynamic servlet = servletContext.addServlet("dispatcher", new DispatcherServlet(ctx));
-		servlet.setInitParameter("contextConfigLocation", "/WEB-INF/spring/appServlet/servlet-context.xml");
+		//servlet.setInitParameter("contextConfigLocation", "/WEB-INF/spring/appServlet/servlet-context.xml");
 		servlet.addMapping("/");
+		servlet.addMapping("/resources/*");
+		/*servlet.addMapping("*.css");
+		servlet.addMapping("*.js");*/
 		servlet.setLoadOnStartup(1);
 	}
 	

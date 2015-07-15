@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.ConnectionRepository;
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.socialhub.servicios.UsuarioService;
 
 @Controller
-@RequestMapping(value="/")
 public class FeedController {
 	@Inject
 	private Facebook facebook;
@@ -29,7 +29,7 @@ public class FeedController {
 	@Autowired
 	private UsuarioService usuarioService;
 	
-	@RequestMapping(value={"/", "feed"}, method = RequestMethod.GET)
+	@RequestMapping(value={"/feed"}, method = RequestMethod.GET)
 	public String llenarFeed(Principal principal, Model model){
 		boolean emptyFeed = true;
 		if(facebook != null){
