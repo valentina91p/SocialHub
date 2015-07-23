@@ -10,17 +10,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.socialhub.modelos.Usuario;
 import com.socialhub.servicios.UsuarioService;
 
-@Controller("/signup")
+@Controller
 public class SignUpController {
 	@Inject
 	private UsuarioService usuarioService;
 	
-	@RequestMapping(method=RequestMethod.GET)
+	@RequestMapping(value="/signup", method=RequestMethod.GET)
 	public String signUpForm(){
 		return "signup";
 	}
 	
-	@RequestMapping(method=RequestMethod.POST)
+	@RequestMapping(value="/signup",method=RequestMethod.POST)
 	public String crearUsuario(HttpServletRequest request){
 		Usuario u = new Usuario();
 		u.setEmail(request.getParameter("email"));
