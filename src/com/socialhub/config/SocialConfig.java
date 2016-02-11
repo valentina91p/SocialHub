@@ -82,6 +82,7 @@ public class SocialConfig implements SocialConfigurer {
 		return connection != null ? connection.getApi() : null;
 	}
 	
+	
 	/*
 	@Bean
 	public ProviderSignInController providerSignInController(ConnectionFactoryLocator connectionFactoryLocator, UsersConnectionRepository usersConnectionRepository) {
@@ -94,17 +95,6 @@ public class SocialConfig implements SocialConfigurer {
 		//connectController.setApplicationUrl("localhost:8080/SocialHub/config");
 		return connectController;
 	}
-	
-	/*
-	@Bean
-	public ProviderSignInController providerSignInController(ConnectionFactoryLocator connectionFactoryLocator, UsersConnectionRepository usersConnectionRepository) {
-		return new ProviderSignInController(connectionFactoryLocator, usersConnectionRepository, new SimpleSignInAdapter(new HttpSessionRequestCache()));
-	}
-	
-	@Bean
-	public DisconnectController disconnectController(UsersConnectionRepository usersConnectionRepository, Environment env) {
-		return new DisconnectController(usersConnectionRepository, env.getProperty("facebook.appSecret"));
-	}*/
 
 	@Bean
 	public ReconnectFilter apiExceptionHandler(UsersConnectionRepository usersConnectionRepository, UserIdSource userIdSource) {

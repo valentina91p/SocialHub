@@ -1,5 +1,8 @@
 package com.socialhub.config;
 
+import java.util.List;
+
+import javax.inject.Inject;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbcp.BasicDataSource;
@@ -8,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -18,12 +22,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
+import com.socialhub.servicios.RedSocialService;
+
 @Configuration
 @ComponentScan(basePackages = "com.socialhub")
 @EnableWebMvc
 @EnableTransactionManagement
 public class WebAppConfig extends WebMvcConfigurerAdapter {
-
+	@Inject
+	private RedSocialService networkService;
+	
 	@Bean
 	public InternalResourceViewResolver viewResolver(){
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
@@ -68,4 +76,13 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
     }
+	
+	/*@Bean
+	@Scope(value="singleton")
+	public List<RedSocial> redessociales() {
+		System.out.println("Loading social networks");
+		List<RedSocial> redes = networkService.listSocialNetworks();
+		System.out.println("Cantidad de redes: "+redes.size());
+		return redes;
+	}*/
 }

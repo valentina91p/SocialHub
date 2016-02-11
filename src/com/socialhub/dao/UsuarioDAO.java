@@ -36,7 +36,7 @@ public class UsuarioDAO {
 	
 	public void updateUsuario(Usuario p) {
         Session session = this.sessionFactory.getCurrentSession();
-        session.update(p);
+        session.save(p);
         logger.info("Usuario updated successfully, Person Details="+p);
     }
 	 @SuppressWarnings("unchecked")

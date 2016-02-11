@@ -1,13 +1,19 @@
 package com.socialhub.modelos;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -22,8 +28,8 @@ public class Usuario {
 	private String nombre;
 	private String email;
 	private String contrasena;
-
-	public int getId() {
+	
+		public int getId() {
 		return id;
 	}
 
@@ -54,9 +60,11 @@ public class Usuario {
 	public void setContrasena(String contrasena) {
 		this.contrasena = contrasena;
 	}
-
-	@Override
+	
+		@Override
 	public String toString() {
 		return "[id = " + id + ", email = " + email + "]";
 	}
+
+	
 }

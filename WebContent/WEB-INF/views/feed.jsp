@@ -21,23 +21,15 @@
 	
 </c:if> 
 
-<c:if test="${!empty fbFeed}">
+<c:if test="${!empty feed}">
     
-    <c:forEach items="${fbFeed}" var="post">
+    <c:forEach items="${feed}" var="post">
         <div>
-            <h6>${post.from.name}</h6> wrote:
+        	<img src="${post.authorImage}"/>
+            <h6>${post.author}</h6> wrote:
 			<p>${post.message}</p>
-			<img src="${post.picture}"/>
-			<hr/>
-        </div>
-    </c:forEach>
-</c:if>
-<c:if test="${!empty timeline}">
-    <h3>Timeline</h3>
-    <c:forEach items="${timeline}" var="tweet">
-        <div>
-            <h6>${tweet.fromUser}</h6> wrote:
-			<p>${tweet.text}</p>
+			${post.createdAt}
+			<img src="${post.image}"/>
 			<hr/>
         </div>
     </c:forEach>
