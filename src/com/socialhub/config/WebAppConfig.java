@@ -72,17 +72,8 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
         super.addResourceHandlers(registry);
     }
-	@Override
-    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-        configurer.enable();
-    }
-	
-	/*@Bean
-	@Scope(value="singleton")
-	public List<RedSocial> redessociales() {
-		System.out.println("Loading social networks");
-		List<RedSocial> redes = networkService.listSocialNetworks();
-		System.out.println("Cantidad de redes: "+redes.size());
-		return redes;
-	}*/
+	 @Override
+	 public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+	    configurer.enable();
+	 }
 }

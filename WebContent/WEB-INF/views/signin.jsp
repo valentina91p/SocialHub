@@ -124,10 +124,7 @@ input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly
 				</div>
 			</div>
 		</div>
-
-	</div>
-	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+		<script type="text/javascript" src="<c:url value='resources/js/materialize.min.js'/>"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
 </body>
 </html>
